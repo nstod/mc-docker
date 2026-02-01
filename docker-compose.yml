@@ -84,3 +84,4 @@ services:
 
 volumes:
   data:
+  geyser-data:
