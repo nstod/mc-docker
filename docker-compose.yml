@@ -21,6 +21,7 @@ networks:
 services:
   geyser:
     image: portiz93/geysermc-proxy:latest
+    pull_policy: daily
     networks:
       minecraft-network:
         ipv4_address: 172.28.0.4
@@ -36,6 +37,7 @@ services:
       - ./minecraft-data/plugins/floodgate/key.pem:/Geyser/floodgate/key.pem:ro
   lazymc:
     image: ghcr.io/joesturge/lazymc-docker-proxy:latest
+    pull_policy: daily
     # the IPs should start at .2 as .1 is reserved for the gateway
     networks:
       minecraft-network:
