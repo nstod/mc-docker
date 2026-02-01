@@ -26,8 +26,6 @@ services:
       minecraft-network:
         ipv4_address: 172.28.0.2
     restart: unless-stopped
-    environment:
-      STARTUP_TIMEOUT: 120s
     volumes:
       # you should mount the minecraft server dir under /server, using read only.
       - ./minecraft-data:/server:ro
