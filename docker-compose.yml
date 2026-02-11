@@ -12,6 +12,7 @@ services:
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
       OPS: BoilingFuncat3
     tty: true
+    restart: unless-stopped
     stdin_open: true
     ports:
       - "25565:25565"
