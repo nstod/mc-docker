@@ -20,6 +20,8 @@ services:
       REMOTE_ADDRESS: lazymc
       REMOTE_PORT: 25565
       REMOTE_AUTH_TYPE: floodgate
+      MOTD_PASSTHROUGH_MOTD: "false"
+      MOTD_PASSTHROUGH_PLAYER_COUNTS: "false"
     ports:
       - "19132:19132/udp"
     volumes:
