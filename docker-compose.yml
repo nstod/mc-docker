@@ -61,6 +61,11 @@ services:
       MODRINTH_PROJECTS: |
         fabric-api
         floodgate
+        c2me-fabric
+        lithium
+        ferrite-core
+        krypton
+        worldreset-fabric
       OPS: BoilingFuncat3
     tty: true
     restart: "no"
