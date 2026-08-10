@@ -54,8 +54,7 @@ services:
       MEMORY: 2G
       MODRINTH_PROJECTS: |
         fabric-api
-      MODS: |
-        https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/fabric
+        floodgate
       OPS: BoilingFuncat3
     tty: true
     restart: "no"
