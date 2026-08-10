@@ -1,8 +1,52 @@
+networks:
+  minecraft-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
 services:
+  geyser:
+    image: portiz93/geysermc-proxy:latest
+    pull_policy: daily
+    networks:
+      minecraft-network:
+        ipv4_address: 172.28.0.4
+    restart: unless-stopped
+    environment:
+      JAVA_ADDRESS: lazymc
+      JAVA_PORT: 25565
+      JAVA_AUTH_TYPE: floodgate
+    ports:
+      - "19132:19132/udp"
+    volumes:
+      - geyser-data:/Geyser/data
+      - ./minecraft-data/config/floodgate:/Geyser/floodgate:ro
+
+  lazymc:
+    image: ghcr.io/joesturge/lazymc-docker-proxy:latest
+    pull_policy: daily
+    networks:
+      minecraft-network:
+        ipv4_address: 172.28.0.2
+    restart: unless-stopped
+    volumes:
+      - ./minecraft-data:/server:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "25565:25565"
+
   mc:
     image: itzg/minecraft-server
     pull_policy: daily
     mem_limit: 2g
+    networks:
+      minecraft-network:
+        ipv4_address: 172.28.0.3
+    labels:
+      - lazymc.enabled=true
+      - lazymc.group=mc
+      - lazymc.server.address=mc:25565
     environment:
       EULA: "TRUE"
       TYPE: "FABRIC"
@@ -14,28 +58,11 @@ services:
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/fabric
       OPS: BoilingFuncat3
     tty: true
-    restart: unless-stopped
+    restart: "no"
     stdin_open: true
-    ports:
-      - "${MC_BACKEND_PORT:-25566}:25565"
     volumes:
       - ./minecraft-data:/data
 
-  geyser:
-    image: portiz93/geysermc-proxy:latest
-    pull_policy: daily
-    environment:
-      JAVA_ADDRESS: "${LAZYMC_ADDRESS:-host.docker.internal}"
-      JAVA_PORT: "${LAZYMC_PORT:-25565}"
-      JAVA_AUTH_TYPE: "floodgate"
-    restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    ports:
-      - "19132:19132/udp"
-    volumes:
-      - ./geyser-data:/Geyser/data
-      - ./minecraft-data/config/floodgate:/Geyser/floodgate:ro
-
 volumes:
   data:
+  geyser-data:
