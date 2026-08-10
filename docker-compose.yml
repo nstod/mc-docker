@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
     stdin_open: true
     ports:
-      - "25565:25565"
+      - "${MC_BACKEND_PORT:-25566}:25565"
     volumes:
       - ./minecraft-data:/data
 
@@ -35,7 +35,7 @@ services:
       - "19132:19132/udp"
     volumes:
       - ./geyser-data:/Geyser/data
-      - ./minecraft-data/config/floodgate/key.pem:/Geyser/floodgate/key.pem:ro
+      - ./minecraft-data/config/floodgate:/Geyser/floodgate:ro
 
 volumes:
   data:
