@@ -55,6 +55,7 @@ services:
       TYPE: "FABRIC"
       VERSION: "26.2"
       MEMORY: 2G
+      SPAWN_PROTECTION: "0"
       MODRINTH_PROJECTS: |
         fabric-api
         floodgate
