@@ -21,7 +21,7 @@ services:
       - "19132:19132/udp"
     volumes:
       - geyser-data:/Geyser/data
-      - ./minecraft-data/config/floodgate:/Geyser/floodgate:ro
+      - ./minecraft-data/plugins/floodgate/key.pem:/Geyser/floodgate/key.pem:ro
 
   lazymc:
     image: ghcr.io/joesturge/lazymc-docker-proxy:latest
