@@ -11,7 +11,6 @@ services:
       MODRINTH_PROJECTS: |
         fabric-api
       MODS: |
-        https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/fabric
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/fabric
       OPS: BoilingFuncat3
     tty: true
@@ -19,9 +18,24 @@ services:
     stdin_open: true
     ports:
       - "25565:25565"
-      - "19132:19132/udp"
     volumes:
       - ./minecraft-data:/data
+
+  geyser:
+    image: portiz93/geysermc-proxy:latest
+    pull_policy: daily
+    environment:
+      JAVA_ADDRESS: "${LAZYMC_ADDRESS:-host.docker.internal}"
+      JAVA_PORT: "${LAZYMC_PORT:-25565}"
+      JAVA_AUTH_TYPE: "floodgate"
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "19132:19132/udp"
+    volumes:
+      - ./geyser-data:/Geyser/data
+      - ./minecraft-data/config/floodgate/key.pem:/Geyser/floodgate/key.pem:ro
 
 volumes:
   data:
