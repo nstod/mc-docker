@@ -5,11 +5,14 @@ services:
     mem_limit: 2g
     environment:
       EULA: "TRUE"
-      TYPE: "PAPER"
+      TYPE: "FABRIC"
+      VERSION: "26.2"
       MEMORY: 2G
-      PLUGINS: |
-        https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
-        https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
+      MODRINTH_PROJECTS: |
+        fabric-api
+      MODS: |
+        https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/fabric
+        https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/fabric
       OPS: BoilingFuncat3
     tty: true
     restart: unless-stopped
