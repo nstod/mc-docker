@@ -17,6 +17,9 @@ services:
       JAVA_ADDRESS: lazymc
       JAVA_PORT: 25565
       JAVA_AUTH_TYPE: floodgate
+      REMOTE_ADDRESS: lazymc
+      REMOTE_PORT: 25565
+      REMOTE_AUTH_TYPE: floodgate
     ports:
       - "19132:19132/udp"
     volumes:
