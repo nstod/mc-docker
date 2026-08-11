@@ -52,6 +52,7 @@ services:
       - lazymc.enabled=true
       - lazymc.group=mc
       - lazymc.server.address=mc:25565
+      - lazymc.time.sleep_after=300
     environment:
       EULA: "TRUE"
       TYPE: "FABRIC"
@@ -61,11 +62,12 @@ services:
       MODRINTH_PROJECTS: |
         fabric-api
         floodgate
-        c2me-fabric
+        c2me-fabric:beta
         lithium
         ferrite-core
         krypton
         worldreset-fabric
+        fabric-language-kotlin
       OPS: BoilingFuncat3
     tty: true
     restart: "no"
